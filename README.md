@@ -101,7 +101,7 @@ We have two options how we can delete data in `DataArchive`.
 DataArchive.default.delete(key: key)
 ```
 
-This method call is scheduled on the (__key__ based) dedicated serial queue and deletes the whole __key__ based subfolder. Which is what we one to do in 90% of the cases. However if we have multiple versions of document, we might we might want to cleanup the old versions only.
+This method call is scheduled on the (__key__ based) dedicated serial queue and deletes the whole __key__ based subfolder. Which is what we want to do in 90% of the cases. However if we have multiple versions of document, we might want to cleanup the old versions only. In this case, following option can be used.
 
 ### Delete old versions for key
 
@@ -113,7 +113,7 @@ With this call we are telling the `DataArchive` to keep the current version and 
 
 # Storing instances of objects which can be converted to `Data`
 
-In the first paragraph we describe `DataArchive` as a library which makes it easy for developers to store `Data` instances. Which is usefull by itself, but in the day to day work, we are dealing with values, which are not instances of `Data`, but can be converted to one. For example `UIImage`, or classes / structs complying to `Codable` protocol.
+In the first paragraph we describe `DataArchive` as a library, which makes it easy for developers to store `Data` instances. This is usefull by itself, but in the day to day work, we are dealing with values, which are not instances of `Data`, but rather can be converted to one. For example `UIImage`, or classes / structs complying to `Codable` protocol.
 
 `DataArchive` provides a `ValueConverter` protocol which can be used store and read data, as an alternative.
 
@@ -174,4 +174,4 @@ self.archive.get(
 }
 ```
 
-The good thing about this mechanism is that the ocnversion of the value to `Data` instance (which can be very computantionaly expensive) is happening on __key__ based queue. Making us worry less about congesting the main thread.
+The good thing about this mechanism, the conversion of the value to `Data` instance (which can be very computantionaly expensive) is happening on __key__ based queue. Making us worry less about congesting the main thread.
